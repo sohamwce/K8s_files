@@ -39,7 +39,30 @@ spec:
         - containerPort: 80
 ```
 
-## 3. Amazon Books Service Configuration
+## 3. Amazon Books Deployment Configuration
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amazon-books
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: amazon-books
+  template:
+    metadata:
+      labels:
+        app: amazon-books
+    spec:
+      containers:
+      - name: amazon-books-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+```
+
+## 4. Amazon Books Service Configuration
 ```yaml
 apiVersion: v1
 kind: Service
@@ -55,7 +78,7 @@ spec:
       targetPort: 80  # Port inside the Pod.
 ```
 
-## 4. Backend Service Configuration
+## 5. Backend Service Configuration
 ```yaml
 apiVersion: v1
 kind: Service
@@ -70,4 +93,3 @@ spec:
       targetPort: 8080
   type: ClusterIP
 ```
-
